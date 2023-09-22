@@ -94,7 +94,7 @@ class FeedbackApiView(APIView):
                 })
                 plain_message = strip_tags(html_message)
                 recipient_list = ['jayblaenterprises@gmail.com','jayblagroup@gmail.com',]
-                from_email = "info@agriwezesha.co.tz"
+                from_email = "mkulimadigital@agriwezesha.co.tz"
                 mail.send_mail(subject,plain_message, from_email, recipient_list, html_message=html_message,fail_silently=False,)
             else:
                 obj = Feedback(
@@ -114,8 +114,8 @@ class FeedbackApiView(APIView):
                     'target':target_obj,                
                 })
                 plain_message = strip_tags(html_message)
-                recipient_list = settings.RECIPIENT_LIST
-                from_email = settings.DEFAULT_FROM_EMAIL
+                recipient_list = ['jayblaenterprises@gmail.com','jayblagroup@gmail.com',]
+                from_email = "mkulimadigital@agriwezesha.co.tz"
                 mail.send_mail(subject,plain_message, from_email, recipient_list, html_message=html_message,fail_silently=False,)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)

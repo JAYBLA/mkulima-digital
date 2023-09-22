@@ -184,4 +184,4 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-RECIPIENT_LIST = ['jayblagroup.com','medsonnaftal@gmail.com',]
+RECIPIENT_LIST = ['info@agriwezesha.co.tz','agriwezesha@gmail.com',]
