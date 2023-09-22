@@ -107,7 +107,7 @@ class FeedbackApiView(APIView):
 
                 # send email
                 subject = 'Mkulima Digital'
-                html_message = render_to_string('mail/mail_template.html', {
+                html_message = render_to_string('mail/mail_template2.html', {
                     'name':obj.name,
                     'phone':obj.phone,
                     'location':obj.location,
