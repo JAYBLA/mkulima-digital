@@ -147,14 +147,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 if not DEBUG:
-    STATIC_ROOT = '/home/jayblaco/public_html/static/'
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = [BASE_DIR / 'media']
+    MEDIA_ROOT = '/home/jayblaco/mkulimadigital.agriwezesha.co.tz/media'
+    STATIC_ROOT = '/home/jayblaco/mkulimadigital.agriwezesha.co.tz/static'
 else:
-    MEDIA_ROOT = 'media/'
+    MEDIA_ROOT = 'media/' 
     
 
 if not DEBUG:
