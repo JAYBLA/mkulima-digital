@@ -77,7 +77,7 @@ class FeedbackApiView(APIView):
                 obj = Feedback(
                     name = name,
                     phone = phone,
-                    location = locatio,
+                    location = location,
                     target = target_obj,
                     pembejeo = pembejeo_obj,
                     description = description
