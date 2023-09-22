@@ -93,7 +93,7 @@ class FeedbackApiView(APIView):
                     'description':obj.description,               
                 })
                 plain_message = strip_tags(html_message)
-                recipient_list = ['jayblaenterprises@gmail.com','jayblagroup@gmail.com',]
+                recipient_list = ['info@agriwezesha.co.tz','agriwezesha@gmail.com',]
                 from_email = "mkulimadigital@agriwezesha.co.tz"
                 mail.send_mail(subject,plain_message, from_email, recipient_list, html_message=html_message,fail_silently=False,)
             else:
@@ -114,7 +114,7 @@ class FeedbackApiView(APIView):
                     'target':target_obj,                
                 })
                 plain_message = strip_tags(html_message)
-                recipient_list = ['jayblaenterprises@gmail.com','jayblagroup@gmail.com',]
+                recipient_list = ['info@agriwezesha.co.tz','agriwezesha@gmail.com',]
                 from_email = "mkulimadigital@agriwezesha.co.tz"
                 mail.send_mail(subject,plain_message, from_email, recipient_list, html_message=html_message,fail_silently=False,)
 
