@@ -88,27 +88,27 @@ WSGI_APPLICATION = 'aconfig.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 if not DEBUG:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.mysql',
-			'NAME': config('DB_NAME'),
-			'USER': config('DB_USER'),
-			'PASSWORD': config('DB_PASSWORD'),
-			'HOST': config('DB_HOST'),
-			'PORT': config('DB_PORT', cast=int),
-			# 'OPTIONS': {
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT', cast=int),
+            # 'OPTIONS': {
             #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
             # },
-		}
-	}
+        }
+    }
 
 else:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.sqlite3',
-			'NAME': str(BASE_DIR / 'db.sqlite3'),
-		}
-	}
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': str(BASE_DIR / 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -150,34 +150,37 @@ MEDIA_URL = '/media/'
 
 
 if not DEBUG:
-	STATIC_ROOT = '/home/jayblaco/public_html/static/'
-	MEDIA_URL = '/media/'
-	MEDIA_ROOT = [BASE_DIR / 'media']
+    STATIC_ROOT = '/home/jayblaco/public_html/static/'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = [BASE_DIR / 'media']
 else:
-	MEDIA_ROOT = 'media/'
-	
+    MEDIA_ROOT = 'media/'
+    
 
 if not DEBUG:
-	BASE_URL = config('BASE_URL')
+    BASE_URL = config('BASE_URL')
 else:
-	BASE_URL = 'http://127.0.0.1:8000'
+    BASE_URL = 'http://127.0.0.1:8000'
 
 
 if not DEBUG:
-	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-	EMAIL_HOST = config('EMAIL_HOST')
-	EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-	EMAIL_PORT = config('EMAIL_PORT', cast=int)
-	EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
-	EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_PORT = config('EMAIL_PORT', cast=int)
+    EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 else:
-	DEFAULT_FROM_EMAIL = 'noreply@jayblagroup.com'
-	EMAIL_HOST_USER = 'noreply@jayblagroup.com'
-	EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-	EMAIL_FILE_PATH = str(BASE_DIR / 'sent_mails')
-	ADMIN_EMAIL = 'admin@jayblagroup.com'
+    DEFAULT_FROM_EMAIL = 'noreply@jayblagroup.com'
+    EMAIL_HOST_USER = 'noreply@jayblagroup.com'
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = str(BASE_DIR / 'sent_mails')
+    ADMIN_EMAIL = 'admin@jayblagroup.com'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RECIPIENT_LIST = ['jayblagroup.com','medsonnaftal@gmail.com',]

@@ -9,6 +9,9 @@ from django.utils.html import strip_tags
 from .models import *
 from .serializers import *
 
+from django.conf import settings
+
+
 class PembejeoApiView(APIView):
     def get(self, request):
 
@@ -65,34 +68,29 @@ class FeedbackApiView(APIView):
 
             target_obj = get_object_or_404(Target, id=data['target_id'])
 
-            name = data['name'],
-            phone = data['phone'],
-            location = data['location'],
-            description = data['description']
-
             if target_obj.name == 'Pembejeo':
 
                 pembejeo_obj = get_object_or_404(Pembejeo, id=data['pembejeo_id'])                
                  
                 obj = Feedback(
-                    name = name,
-                    phone = phone,
-                    location = location,
+                    name = data['name'],
+                    phone = data['phone'],
+                    location = data['location'],
                     target = target_obj,
                     pembejeo = pembejeo_obj,
-                    description = description
+                    description = data['description'],
                 )
                 obj.save()
 
                 # send email
                 subject = 'Mkulima Digital'
                 html_message = render_to_string('mail/mail_template.html', {
-                    'name':name,
-                    'phone':phone,
-                    'location':location,
+                    'name':obj.name,
+                    'phone':obj.phone,
+                    'location':obj.location,
                     'target':target_obj, 
                     'pembejeo':pembejeo_obj,
-                    'description':description,               
+                    'description':obj.description,               
                 })
                 plain_message = strip_tags(html_message)
                 recipient_list = ['jayblaenterprises@gmail.com','jayblagroup@gmail.com',]
@@ -100,9 +98,9 @@ class FeedbackApiView(APIView):
                 mail.send_mail(subject,plain_message, from_email, recipient_list, html_message=html_message,fail_silently=False,)
             else:
                 obj = Feedback(
-                    name = name,
-                    phone = phone,
-                    location = location,
+                    name = data['name'],
+                    phone = data['phone'],
+                    location = data['location'],
                     target = target_obj,
                 )
                 obj.save()
@@ -110,14 +108,14 @@ class FeedbackApiView(APIView):
                 # send email
                 subject = 'Mkulima Digital'
                 html_message = render_to_string('mail/mail_template.html', {
-                    'name':name,
-                    'phone':phone,
-                    'location':location,
+                    'name':obj.name,
+                    'phone':obj.phone,
+                    'location':obj.location,
                     'target':target_obj,                
                 })
                 plain_message = strip_tags(html_message)
-                recipient_list = ['jayblaenterprises@gmail.com','jayblagroup@gmail.com',]
-                from_email = "info@agriwezesha.co.tz"
+                recipient_list = settings.RECIPIENT_LIST
+                from_email = settings.DEFAULT_FROM_EMAIL
                 mail.send_mail(subject,plain_message, from_email, recipient_list, html_message=html_message,fail_silently=False,)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
