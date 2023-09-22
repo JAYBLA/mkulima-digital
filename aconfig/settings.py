@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 if not DEBUG:
-    ALLOWED_HOSTS = ['.jayblagroup.com', 'jayblagroup.com', 'www.jayblagroup.com']
+    ALLOWED_HOSTS = ['.mkulimadigital.agriwezesha.co.tz', 'mkulimadigital.agriwezesha.co.tz', 'www.mkulimadigital.agriwezesha.co.tz','www.agriwezesha.co.tz','.agriwezesha.co.tz','agriwezesha.co.tz']
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
