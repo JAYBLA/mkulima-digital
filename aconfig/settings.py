@@ -152,8 +152,8 @@ STATICFILES_DIRS = [
 ]
 
 if not DEBUG:
-    MEDIA_ROOT = '/home/jayblaco/mkulimadigital.agriwezesha.co.tz/media'
-    STATIC_ROOT = '/home/jayblaco/mkulimadigital.agriwezesha.co.tz/static'
+    MEDIA_ROOT = '/home/agriwez1/mkulimadigital.agriwezesha.co.tz/media'
+    STATIC_ROOT = '/home/agriwez1/mkulimadigital.agriwezesha.co.tz/static'
 else:
     MEDIA_ROOT = 'media/' 
     
