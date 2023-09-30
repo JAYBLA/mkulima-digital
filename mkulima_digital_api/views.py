@@ -12,38 +12,7 @@ from .serializers import *
 from django.conf import settings
 
 
-class PembejeoApiView(APIView):
-    def get(self, request):
 
-        pembejeos = Pembejeo.objects.all()
-        serializer = PembejeoSerializer(pembejeos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request):
-
-        data = request.data 
-        serializer = PembejeoSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class TargetApiView(APIView):
-
-    def get(self, request):
-        targets = Target.objects.all()
-        serializer = TargetSerializer(targets, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-    def post(self, request):
-
-        data = request.data 
-        serializer = TargetSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class FeedbackApiView(APIView):
 
@@ -58,27 +27,22 @@ class FeedbackApiView(APIView):
     def post(self, request, *args, **kwargs):
 
         # logic
-        data = request.data
-
- 
+        data = request.data 
         
         serializer = FeedbackSerializer(data=data)
 
         if serializer.is_valid():
 
-            target_obj = get_object_or_404(Target, id=data['target_id'])
-
-            if target_obj.name == 'Pembejeo':
-
-                pembejeo_obj = get_object_or_404(Pembejeo, id=data['pembejeo_id'])                
+            
+            if data['target'] == 1:                              
                  
                 obj = Feedback(
                     name = data['name'],
                     phone = data['phone'],
                     location = data['location'],
-                    target = target_obj,
-                    pembejeo = pembejeo_obj,
-                    description = data['description'],
+                    target = data['target'],
+                    pembejeo_type = data['pembejeo_type'],                
+                    pembejeo_desc = data['pembejeo_desc']                    
                 )
                 obj.save()
 
@@ -88,9 +52,9 @@ class FeedbackApiView(APIView):
                     'name':obj.name,
                     'phone':obj.phone,
                     'location':obj.location,
-                    'target':target_obj, 
-                    'pembejeo':pembejeo_obj,
-                    'description':obj.description,               
+                    'target':'Pembejeo',
+                    'pembejeo_type' : obj.pembejeo_type,                                    
+                    'pembejeo_desc':obj.pembejeo_desc,                               
                 })
                 plain_message = strip_tags(html_message)
                 recipient_list = ['info@agriwezesha.co.tz','agriwezesha@gmail.com',]
@@ -101,7 +65,8 @@ class FeedbackApiView(APIView):
                     name = data['name'],
                     phone = data['phone'],
                     location = data['location'],
-                    target = target_obj,
+                    target =data['target'],                    
+                    ushauri_desc = data['ushauri_desc']                   
                 )
                 obj.save()
 
@@ -111,7 +76,8 @@ class FeedbackApiView(APIView):
                     'name':obj.name,
                     'phone':obj.phone,
                     'location':obj.location,
-                    'target':target_obj,                
+                    'target':'Huduma za Kitalaamu',
+                    'ushauri_desc':obj.ushauri_desc             
                 })
                 plain_message = strip_tags(html_message)
                 recipient_list = ['info@agriwezesha.co.tz','agriwezesha@gmail.com',]
